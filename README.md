@@ -1,6 +1,8 @@
 # grepips
 Making this tool to get the ips ( fresh dns servers ) aka resolvers then inserting it on ~/.config/subfinder/config.yaml
 
+Twitter: @Bodresha
+
 # two ways to run
 (1) - recommended
 
